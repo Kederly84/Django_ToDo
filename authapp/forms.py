@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -22,3 +23,7 @@ class CustomUserChangeForm(UserChangeForm):
             'last_name',
             'email'
         )
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(label='Username / Email')

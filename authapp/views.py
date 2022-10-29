@@ -4,10 +4,11 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, UpdateView
 from authapp.models import User
-from authapp.forms import CustomUserChangeForm, CustomUserCreationForm
+from authapp.forms import CustomUserChangeForm, CustomUserCreationForm, CustomAuthenticationForm
 
 
 class CustomLoginView(LoginView):
+    form_class = CustomAuthenticationForm
     template_name = 'authapp/login.html'
     extra_context = {
         'title': 'Вход пользователя'
