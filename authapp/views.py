@@ -17,7 +17,7 @@ class CustomLoginView(LoginView):
     def form_valid(self, form):
         ret = super().form_valid(form)
 
-        message = ("Вход успешный!<br>Здраствуйте, %(username)s") % {
+        message = ("Здраствуйте, <br> %(username)s") % {
             "username": self.request.user.get_full_name()
             if self.request.user.get_full_name()
             else self.request.user.get_username()
@@ -37,6 +37,12 @@ class CustomLogoutView(LogoutView):
 class CustomPasswordChangeView(PasswordChangeView):
     success_url = reverse_lazy('authapp:login')
     template_name = 'authapp/password_change_form.html'
+
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        message = ("Пароль успешно изменен!")
+        messages.add_message(self.request, messages.INFO, mark_safe(message))
+        return ret
 
 
 class CreateUserView(CreateView):
